@@ -1,0 +1,6 @@
+dekstop.ini
+*.csv
+ht_output.json
+lt_output.json
+lt2_output.json
+thermomag-plot.png
