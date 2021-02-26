@@ -24,7 +24,6 @@ raw_lt2_data = np.genfromtxt("DA7_1-L2.csv", delimiter=',', skip_header=0)
 lt_data = np.array(raw_lt_data[1:,:], dtype=float)
 ht_data = np.array(raw_ht_data[1:,:], dtype=float)
 lt2_data = np.array(raw_lt2_data[1:,:], dtype=float)
-#print(lt_data)
 
 # Convert temperature units from celsius to kelvin
 lt_conversion = (lt_data[:,0,None] + 273.15)
