@@ -7,7 +7,6 @@ import pandas as pd
 raw_lt_data = np.genfromtxt("data/DA7_1-L1.csv", delimiter=',', skip_header=0)
 raw_ht_data = np.genfromtxt("data/DA7_1-H1.csv", delimiter=',', skip_header=0)
 raw_lt2_data = np.genfromtxt("data/DA7_1-L2.csv", delimiter=',', skip_header=0)
-#print(raw_lt_data)
 
 # Select the data range we are interested in, convert it into a new array, full of numbers
 lt_data = np.array(raw_lt_data[1:,:], dtype=float)
