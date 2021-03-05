@@ -1,20 +1,9 @@
-#Original file is located at
-#    https://colab.research.google.com/drive/14zX46QRSJrXeCoAeo29QGVL_nd_I8fX-
-
-# Exercise 4
-#   GLY6932 - Data and Software Use, Spring 2021
-#   University of Florida, Gainesville, FL, USA
-
-# The purpose of this script is to convert measurements of magnetic data after step-wise thermal treatment into thermal demagnetization spectra.
-# It is designed for data measured with a 2G Enterprises cryogenic magnetometer and CryoPC3 software.
-# So, for example, units of magnetic moment convert from emu to Am^2. 
-
 # Import libraries
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Create an array 
+# Create arrays with each leg of thermomagnetic data 
 raw_lt_data = np.genfromtxt("data/DA7_1-L1.csv", delimiter=',', skip_header=0)
 raw_ht_data = np.genfromtxt("data/DA7_1-H1.csv", delimiter=',', skip_header=0)
 raw_lt2_data = np.genfromtxt("data/DA7_1-L2.csv", delimiter=',', skip_header=0)
@@ -30,7 +19,7 @@ lt_conversion = (lt_data[:,0,None] + 273.15)
 ht_conversion = (ht_data[:,0,None] + 273.15)
 lt2_conversion = (lt2_data[:,0,None] + 273.15)
 
-# Append this new column to the existing temperature_data array
+# Append these new columns to the existing data arrays
 processed_lt_data = np.append(lt_data, lt_conversion,1)
 processed_ht_data = np.append(ht_data, ht_conversion,1)
 processed_lt2_data = np.append(lt2_data, lt2_conversion,1)
@@ -40,14 +29,26 @@ print (processed_lt_data[1])
 thermomag_figure = plt.figure()
 
 ## Plotting each dataset as a line
-plt.plot(processed_lt_data[:,9],processed_lt_data[:,2], 
-    color='blue', linestyle='dashed', linewidth='1.5', label="L1")
+plt.plot(processed_lt_data[:,9],
+        processed_lt_data[:,2],
+        color='blue', 
+        linestyle='dashed', 
+        linewidth='1.5', 
+        label="L1")
 
-plt.plot(processed_ht_data[:,9],processed_ht_data[:,2], 
-    color='firebrick', linestyle='solid', linewidth='1.5', label="H1")
+plt.plot(processed_ht_data[:,9],
+         processed_ht_data[:,2],
+         color='firebrick', 
+         linestyle='solid', 
+         linewidth='1.5', 
+         label="H1")
 
-plt.plot(processed_lt2_data[:,9],processed_lt2_data[:,2], 
-    color='blue', linestyle='dotted', linewidth='2', label="L2")
+plt.plot(processed_lt2_data[:,9],
+         processed_lt2_data[:,2],
+         color='blue', 
+         linestyle='dotted',
+         linewidth='2',
+         label="L2")
 
 ## Adding arrows to indicate direction of measurement
 plt.arrow(522,2280, 100, 0, head_width=20, head_length=18, fc='k', ec='k')
@@ -56,8 +57,15 @@ plt.arrow(866,1196, -20, 150, head_width=18, head_length=22, fc='k', ec='k')
 plt.arrow(444,1858, -55, 150, head_width=18, head_length=22, fc='k', ec='k')
 
 ## Specifying parameters for fonts
-titlefont = {'family': 'serif','color': 'black', 'weight': 'bold', 'size': 14}
-axesfont = {'family': 'sans-serif', 'style': 'italic', 'color': 'darkslategray', 'weight': 'normal', 'size': 12}
+titlefont = {'family': 'serif',
+             'color': 'black',
+             'weight': 'bold',
+             'size': 14}
+axesfont = {'family': 'sans-serif',
+            'style': 'italic',
+            'color': 'darkslategray',
+            'weight': 'normal',
+            'size': 12}
 
 ## Adding title, axes labels, and legend
 plt.title('Thermomagnetic Behavior', fontdict=titlefont)
