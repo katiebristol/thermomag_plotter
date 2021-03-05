@@ -15,9 +15,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Create an array 
-raw_lt_data = np.genfromtxt("data/DA7_1-L1.csv", delimiter=',', skip_header=0)
-raw_ht_data = np.genfromtxt("data/DA7_1-H1.csv", delimiter=',', skip_header=0)
-raw_lt2_data = np.genfromtxt("data/DA7_1-L2.csv", delimiter=',', skip_header=0)
+raw_lt_data = np.genfromtxt("../data/DA7_1-L1.csv", delimiter=',', skip_header=0)
+raw_ht_data = np.genfromtxt("../data/DA7_1-H1.csv", delimiter=',', skip_header=0)
+raw_lt2_data = np.genfromtxt("../data/DA7_1-L2.csv", delimiter=',', skip_header=0)
 #print(raw_lt_data)
 
 # Select the data range we are interested in, convert it into a new array, full of numbers
@@ -69,22 +69,22 @@ plt.legend()
 
 ## Showing and saving the figure to results folder
 plt.show(block=True)
-thermomag_figure.savefig('results/thermomag-plot.png')
+thermomag_figure.savefig('../results/thermomag-plot.png')
 
 # Converting the data to pandas dataframes and then outputting as json format
-lt_data_pd = pd.read_csv("data/DA7_1-L1.csv", header=0)
+lt_data_pd = pd.read_csv("../data/DA7_1-L1.csv", header=0)
 #lt_data_pd.info()
-lt_data_pd.to_json("results/lt_output.json")
-ht_data_pd = pd.read_csv("data/DA7_1-h1.csv", header=0)
+lt_data_pd.to_json("../results/lt_output.json")
+ht_data_pd = pd.read_csv("../data/DA7_1-h1.csv", header=0)
 #ht_data_pd.info()
-ht_data_pd.to_json("results/ht_output.json")
-lt2_data_pd = pd.read_csv("data/DA7_1-L2.csv", header=0)
+ht_data_pd.to_json("../results/ht_output.json")
+lt2_data_pd = pd.read_csv("../data/DA7_1-L2.csv", header=0)
 #lt2_data_pd.info()
-lt2_data_pd.to_json("results/lt2_output.json")
+lt2_data_pd.to_json("../results/lt2_output.json")
 
-lt_json_data = pd.read_json("results/lt_output.json")
+lt_json_data = pd.read_json("../results/lt_output.json")
 #lt_json_data.info()
-h1_json_data = pd.read_json("results/ht_output.json")
+h1_json_data = pd.read_json("../results/ht_output.json")
 #h1_json_data.info()
-lt2_json_data = pd.read_json("results/lt2_output.json")
+lt2_json_data = pd.read_json("../results/lt2_output.json")
 #lt2_json_data.info()
