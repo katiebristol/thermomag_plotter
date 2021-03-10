@@ -3,15 +3,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Create arrays with each leg of thermomagnetic data 
-raw_lt_data = np.genfromtxt("data/DA7_1-L1.csv", delimiter=',', skip_header=0)
-raw_ht_data = np.genfromtxt("data/DA7_1-H1.csv", delimiter=',', skip_header=0)
-raw_lt2_data = np.genfromtxt("data/DA7_1-L2.csv", delimiter=',', skip_header=0)
+def read_data(filename, delimiter=',', starting_row=0):
+        """This fundtion reads data from a specified filename.
+        The specified filename should point to a .csv file."""
+        # Create an array (a multi-dimensional table) out of our data file, full of text
+        all_data = np.genfromtxt(filename, delimiter=delimiter, skip_header=0)
 
-# Select the data range we are interested in, convert it into a new array, full of numbers
-lt_data = np.array(raw_lt_data[1:,:], dtype=float)
-ht_data = np.array(raw_ht_data[1:,:], dtype=float)
-lt2_data = np.array(raw_lt2_data[1:,:], dtype=float)
+        # Select the data range we are interested in, convert it into a new array, full of numbers
+        lt_data = np.array(all_data[starting_row:,:], dtype=float)
+        return lt_data
+
+lt_data = read_data("data/DA7_1-L1.csv")
+ht_data = read_data("data/DA7_1-H1.csv")
+lt2_data = read_data("data/DA7_1-L2.csv")
+
+# I think I can delete all of this now but may want to double check... 
+        #raw_lt_data = np.genfromtxt("data/DA7_1-L1.csv", delimiter=',', skip_header=0)
+        #raw_ht_data = np.genfromtxt("data/DA7_1-H1.csv", delimiter=',', skip_header=0)
+        #raw_lt2_data = np.genfromtxt("data/DA7_1-L2.csv", delimiter=',', skip_header=0)
+
+        # Select the data range we are interested in, convert it into a new array, full of numbers
+        #lt_data = np.array(raw_lt_data[1:,:], dtype=float)
+        #ht_data = np.array(raw_ht_data[1:,:], dtype=float)
+        #lt2_data = np.array(raw_lt2_data[1:,:], dtype=float)
 
 # Convert temperature units from celsius to kelvin
 lt_conversion = (lt_data[:,0,None] + 273.15)
