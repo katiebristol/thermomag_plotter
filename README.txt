@@ -41,4 +41,4 @@ When using this data in publications or posters, please cite via the information
 
 ## License
 
-[CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/deed.en)
+See LICENSE.txt for more info. 
