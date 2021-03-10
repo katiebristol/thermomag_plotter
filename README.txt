@@ -1,43 +1,30 @@
-This file includes data from a thermal demagnetization experiment on Daule L5 ordinary chondrite meteorite material,
-Material was measured using a 2G Enterprises 760-R 3-axis SQUID rock magnetometer and PAcquire software on November 18, 2019 at 13:15 EST.
-Empty sample holder value (measured beforehand) was automatically subtracted from this data during measurement.
-Before measurement, the material was separated from a larger fragment through use of a rotary tool, shaped into a cube (~3mm^3), and arbitrarily oriented.
-NRM value is initial measurement to establish a baseline before thermal treatments.
-LTD value is measurement after submersion in liquid nitrogen to reduce the effects of multidomain grains (Smirnov et al. 2017). 
-The specimen was alternately flipped during thermal treatments (fiduciary aligned with +Z, -Z).
+# Purpose
 
+This software was created to streamline the process of plotting thermomagnetic curves with matplotlib.
+It was designed for use with data files output by AGICO MFK1-FA Kappabridges but may work with other 
+AGICO instruments as well. The script takes low- and high-temperature thermomagnetic data, converts units
+of temperature from Celsius to Kelvin, and then plots the data using a figure scheme that is common in 
+the field of paleomagnetism/rock magnetism.
 
-# Thermomagnetic Behavior of bulk Daule material
+## Inputs
 
-The three datasets in this file include:
-*lt_output.json: Pre-heating low-temperature thermomagnetic data
-*ht_output.json: High-temperature thermomagnetic data
-*lt2_output.json: Post-heating low-temperature thermomagnetic data
+This software requires three input files:
+-Pre-heating low-temperature thermomagnetic susceptibility
+-High-temperature thermomagnetic susceptibility
+-Post-heating low-temperature thermomagnetic susceptibility
 
-Relevant data labels and units:
-*TEMP (temperature), Kelvin
-*TSUSC (raw magnetic susceptibility), unitless
-*CSUSC (corrected magnetic susceptibility), unitless
-*NSUSC (normalized magnetic susceptibility), unitless
-*MASSS (mass-normalized magnetic susceptibility), unitless
-*TIME (time), seconds
+All files should be converted from their original .clw and .cur files to .csv format before using this software.
 
-## Sample information and preparation
+## Outputs
 
-All data were measured on bulk Daule L5 Ordinary Chondrite (Ecuador) meteorite material on June 18th, 2020. 
-The specimen was seaparated from a larger sample through use of a rotary tool and non-magnetic circular heads.
-The specimen was then crushed using an agate mortar in pestle and placed into a quartz tube for measurement.
+If inputs are correct, the software should output a figure (.png extension) of the thermomagnetic curves. 
+In addition, the corrected data files will be output in .json format. 
 
-## Instrumentation and corrective measures
+## Notes
 
-All data were acquired using an AGICO MFK1-FA Kappabridge with a CS-L cryostat and CS-3 furnace appartatus at Michigan Technological University, Houghton, MI.
-Sufyte5 software (http://www.agico.com/text/software/sufyte5/sufyte5.php) was utilized to control the instrument. 
-Low and high-temperature measurements of the empty quartz tube were performed before measurement of the specimen.
-Cureval software (http://www.agico.com/text/software/cureval/cureval.php) was used to subtract the empty tube data from acquired datasets.
-
-## Citation
-
-When using this data in publications or posters, please cite via the information here: https://digitalcommons.mtu.edu/etdr/1049/
+The arrows indicating the direction of measurement will need to be tailored to each set of data. To do this,
+edit the x, y, dx, dy parameters of each arrow. For a more detailed description, see:
+https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.arrow.html
 
 ## License
 
