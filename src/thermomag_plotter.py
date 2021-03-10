@@ -92,7 +92,7 @@ plt.legend()
 plt.show(block=True)
 thermomag_figure.savefig('results/thermomag-plot.png')
 
-# Converting the data to pandas dataframes and then outputting as json format
+# Converting the data to pandas dataframes and then outputting as .json format
 lt_data_pd = pd.read_csv("data/DA7_1-L1.csv", header=0)
 #lt_data_pd.info()
 lt_data_pd.to_json("results/lt_output.json")
