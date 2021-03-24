@@ -85,18 +85,12 @@ thermomag_figure.savefig('results/thermomag-plot.png')
 
 # Converting the data to pandas dataframes and then outputting as .json format
 lt_data_pd = pd.read_csv("data/DA7_1-L1.csv", header=0)
-#lt_data_pd.info()
 lt_data_pd.to_json("results/lt_output.json")
 ht_data_pd = pd.read_csv("data/DA7_1-h1.csv", header=0)
-#ht_data_pd.info()
 ht_data_pd.to_json("results/ht_output.json")
 lt2_data_pd = pd.read_csv("data/DA7_1-L2.csv", header=0)
-#lt2_data_pd.info()
 lt2_data_pd.to_json("results/lt2_output.json")
 
 lt_json_data = pd.read_json("results/lt_output.json")
-#lt_json_data.info()
 h1_json_data = pd.read_json("results/ht_output.json")
-#h1_json_data.info()
 lt2_json_data = pd.read_json("results/lt2_output.json")
-#lt2_json_data.info()
