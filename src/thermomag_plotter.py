@@ -17,26 +17,6 @@ lt_data = read_data("data/DA7_1-L1.csv")
 ht_data = read_data("data/DA7_1-H1.csv")
 lt2_data = read_data("data/DA7_1-L2.csv")
 
-#def convert(filename, delimiter=',', starting_row=0):
-        """This function converts the temperature data and
-        appends the processed data onto each dataframe."""
-        # Convert from celsius to kelvin
- #       conversion = (filename[:,0,None] + 273.15)
-
-        # Append the converted data to the existing dataframe.
-#        processed_data = np.append(all_data, conversion,1)
-#        return processed_data
-
-# I think I can delete all of this now but may want to double check... 
-        #raw_lt_data = np.genfromtxt("data/DA7_1-L1.csv", delimiter=',', skip_header=0)
-        #raw_ht_data = np.genfromtxt("data/DA7_1-H1.csv", delimiter=',', skip_header=0)
-        #raw_lt2_data = np.genfromtxt("data/DA7_1-L2.csv", delimiter=',', skip_header=0)
-
-        # Select the data range we are interested in, convert it into a new array, full of numbers
-        #lt_data = np.array(raw_lt_data[1:,:], dtype=float)
-        #ht_data = np.array(raw_ht_data[1:,:], dtype=float)
-        #lt2_data = np.array(raw_lt2_data[1:,:], dtype=float)
-
 # Convert temperature units from celsius to kelvin
 lt_conversion = (lt_data[:,0,None] + 273.15)
 ht_conversion = (ht_data[:,0,None] + 273.15)
