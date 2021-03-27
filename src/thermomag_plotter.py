@@ -2,37 +2,44 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
+import sys
 
 def read_data(filename, delimiter=',', starting_row=0):
         """This function reads data from a specified filename.
         The specified filename should point to a .csv file."""
         # Create an array (a multi-dimensional table) out of our data file, full of text
-        all_data = np.genfromtxt(filename, delimiter=delimiter, skip_header=0)
+        thermomag_data = np.genfromtxt(filename, delimiter=delimiter, skip_header=0)
 
         # Select the data range we are interested in, convert it into a new array, full of numbers
-        lt_data = np.array(all_data[starting_row:,:], dtype=float)
-        return lt_data
+        data_array = np.array(thermomag_data[starting_row:,:], dtype=float)
+        return data_array
 
 lt_data = read_data("data/DA7_1-L1.csv")
 ht_data = read_data("data/DA7_1-H1.csv")
 lt2_data = read_data("data/DA7_1-L2.csv")
 
-# Convert temperature units from celsius to kelvin
-lt_conversion = (lt_data[:,0,None] + 273.15)
-ht_conversion = (ht_data[:,0,None] + 273.15)
-lt2_conversion = (lt2_data[:,0,None] + 273.15)
+def process_data(data_array):
+    # Compute a new column by multiplying column number 1 to Kelvin
+    temp_kelvin = (data_array[:,0,None] + 273.15)
 
-# Append these new columns to the existing data arrays
-processed_lt_data = np.append(lt_data, lt_conversion,1)
-processed_ht_data = np.append(ht_data, ht_conversion,1)
-processed_lt2_data = np.append(lt2_data, lt2_conversion,1)
-print (processed_lt_data[1])
+    # Append this new column to the existing temperature_data array
+    processed_data = np.append(data_array, temp_kelvin,1)
+    return processed_data
+
+processed_lt_data = process_data(lt_data)
+processed_ht_data = process_data(ht_data)
+processed_lt2_data = process_data(lt2_data)
+print(processed_ht_data)
 
 # Create a figure of the processed data
-
+## I tried everything I could think of to make this a function but nothing worked
+## My issue seems that each dataset (lt, ht, lt2) require different parameters for plotting so one function wouldn't work.
+## I tried an if statement to at least separate the lt's from ht but could not get all three to plot on one graph
+## without it yelling at me about "unexpected" indents. I need to get gud. 
 thermomag_figure = plt.figure()
 
-## Plotting each dataset as a line
+## Plotting each dataset as a line with unique colors and line styles
 plt.plot(processed_lt_data[:,9],
         processed_lt_data[:,2],
         color='blue', 
@@ -84,13 +91,40 @@ plt.show(block=True)
 thermomag_figure.savefig('results/thermomag-plot.png')
 
 # Converting the data to pandas dataframes and then outputting as .json format
-lt_data_pd = pd.read_csv("data/DA7_1-L1.csv", header=0)
-lt_data_pd.to_json("results/lt_output.json")
-ht_data_pd = pd.read_csv("data/DA7_1-h1.csv", header=0)
-ht_data_pd.to_json("results/ht_output.json")
-lt2_data_pd = pd.read_csv("data/DA7_1-L2.csv", header=0)
-lt2_data_pd.to_json("results/lt2_output.json")
+## Maybe this can be a function, try later 
+#lt_data_pd = pd.read_csv("data/DA7_1-L1.csv", header=0)
+#lt_data_pd.to_json("results/lt_output.json")
+#ht_data_pd = pd.read_csv("data/DA7_1-h1.csv", header=0)
+#ht_data_pd.to_json("results/ht_output.json")
+#lt2_data_pd = pd.read_csv("data/DA7_1-L2.csv", header=0)
+#lt2_data_pd.to_json("results/lt2_output.json")
 
-lt_json_data = pd.read_json("results/lt_output.json")
-h1_json_data = pd.read_json("results/ht_output.json")
-lt2_json_data = pd.read_json("results/lt2_output.json")
+#lt_json_data = pd.read_json("results/lt_output.json")
+#h1_json_data = pd.read_json("results/ht_output.json")
+#lt2_json_data = pd.read_json("results/lt2_output.json")
+
+def convert_data(filename, output_filename):
+    all_data = pd.read_csv(filename, header=0)
+    all_data.info()
+    all_data.to_json(output_filename)
+
+def plot():
+    input_file = ("DA7_1-L1.csv", "DA7_1-H1.csv", "DA7_1-L2.csv")
+    plot_file = "thermomag_plot.pdf"
+    json_output_file = "data_output.json"
+
+    data_directory = os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "data"))
+    results_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","results"))
+    
+    input_filename = os.path.join(data_directory,input_file)
+    plot_filename = os.path.join(results_directory,plot_file)
+    json_filename = os.path.join(results_directory,json_output_file)
+    
+    data_array = read_data(input_filename, starting_row=0)
+    processed_data = process_data(data_array)
+#    plot_data(processed_data, plot_filename)
+    convert_data(input_filename, json_filename)
+
+if __name__ == "__main__":
+    print(sys.argv)
+    plot()
