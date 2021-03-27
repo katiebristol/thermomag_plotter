@@ -109,21 +109,35 @@ def convert_data(filename, output_filename):
     all_data.to_json(output_filename)
 
 def plot():
-    input_file = ("DA7_1-L1.csv", "DA7_1-H1.csv", "DA7_1-L2.csv")
-    plot_file = "thermomag_plot.pdf"
-    json_output_file = "data_output.json"
+    lt_input_file = ("DA7_1-L1.csv")
+    ht_input_file = ("DA7_1-H1.csv")
+    lt2_input_file = ("DA7_1-L2.csv")
+#    plot_file = "thermomag_plot.pdf"
+    lt_json_output_file = "lt_data_output.json"
+    ht_json_output_file = "ht_data_output.json"
+    lt2_json_output_file = "lt2_data_output.json"
 
     data_directory = os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "data"))
     results_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","results"))
     
-    input_filename = os.path.join(data_directory,input_file)
-    plot_filename = os.path.join(results_directory,plot_file)
-    json_filename = os.path.join(results_directory,json_output_file)
+    lt_input_filename = os.path.join(data_directory,lt_input_file)
+    ht_input_filename = os.path.join(data_directory,ht_input_file)
+    lt2_input_filename = os.path.join(data_directory,lt2_input_file)
+#    plot_filename = os.path.join(results_directory,plot_file)
+    lt_json_filename = os.path.join(results_directory,lt_json_output_file)
+    ht_json_filename = os.path.join(results_directory,ht_json_output_file)
+    lt2_json_filename = os.path.join(results_directory,lt2_json_output_file)
     
-    data_array = read_data(input_filename, starting_row=0)
-    processed_data = process_data(data_array)
-#    plot_data(processed_data, plot_filename)
-    convert_data(input_filename, json_filename)
+#    lt_data_array = read_data(lt_input_filename, starting_row=0)
+#    ht_data_array = read_data(ht_input_filename, starting_row=0)
+#    lt2_data_array = read_data(lt2_input_filename, starting_row=0)
+    
+#    processed_lt_data = process_data(lt_data_array)
+#    processed_ht_data = process_data(ht_data_array)
+#    processed_lt2_data = process_data(lt2_data_array)
+    convert_data(lt_input_filename, lt_json_filename)
+    convert_data(ht_input_filename, ht_json_filename)
+    convert_data(lt2_input_filename, lt2_json_filename)
 
 if __name__ == "__main__":
     print(sys.argv)
