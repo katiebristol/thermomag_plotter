@@ -93,7 +93,7 @@ def plot():
     lt_input_file = ("DA7_1-L1.csv")
     ht_input_file = ("DA7_1-H1.csv")
     lt2_input_file = ("DA7_1-L2.csv")
-    plot_file = "testplot.pdf"
+    plot_file = "thermomag_figure.pdf"
     lt_json_output_file = "lt_data_output.json"
     ht_json_output_file = "ht_data_output.json"
     lt2_json_output_file = "lt2_data_output.json"
