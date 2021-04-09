@@ -8,21 +8,21 @@ sys.path.append(os.path.join(
     os.path.dirname(__file__),
     ".."))
 
-import src.thermomag_plotter as thermomag_plotter
+from src import thermomag_plotter as thermomag_plotter
 
 def test_plot():
     assert(thermomag_plotter.plot() == None)
 
 def test_process_data():
+    """Test that data processing returns the correct values."""
     input_data = np.array([[0,0],[1,100]])
     function_output = thermomag_plotter.process_data(input_data)
     expected_output = np.array([[0,0,273.15],[1,100,373.15]])
-    """The input can maybe be arbitrary? and then function is just my function and
-    then expected output is input,what-it-should-be I guess?"""
     
     assert(np.all(function_output == expected_output))
 
 def test_read_data():
+    """Test that data can be read in properly."""
     lt_input_file = ("DA7_1-L1.csv")
     ht_input_file = ("DA7_1-H1.csv")
     lt2_input_file = ("DA7_1-L2.csv")
@@ -42,11 +42,12 @@ def test_read_data():
     assert(lt2_data[0,1] == 2225)
 
 def test_plot_data():
+    """Test that the script produces a plot."""
     plot_file = "test_plot_data.pdf"
     results_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","results"))
     plot_filename = os.path.join(results_directory,plot_file)
 
-    input_data = np.array([[0,0,273],[1,100,373]])
+    input_data = np.array([[0,0,273.15],[1,100,373.15]])
 
     if os.path.exists(plot_filename):
         os.remove(plot_filename)
@@ -56,6 +57,8 @@ def test_plot_data():
     assert (os.path.exists(plot_filename))
 
 def test_convert_data():
+    """Test that the data is converted into json that is
+    consistent with the input."""
     lt_input_file = ("DA7_1-L1.csv")
     ht_input_file = ("DA7_1-H1.csv")
     lt2_input_file = ("DA7_1-L2.csv")
