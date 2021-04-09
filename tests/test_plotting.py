@@ -47,12 +47,14 @@ def test_plot_data():
     results_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","results"))
     plot_filename = os.path.join(results_directory,plot_file)
 
-    input_data = np.array([[0,273.15],[1,373.15]])
+    lt_input_data = np.array([[0,273.15],[1,373.15]])
+    ht_input_data = np.array([[0,273.15],[1,373.15]])
+    lt2_input_data = np.array([[0,273.15],[1,373.15]])
 
     if os.path.exists(plot_filename):
         os.remove(plot_filename)
         
-    thermomag_plotter.plot_data(input_data, plot_filename)
+    thermomag_plotter.plot_data(lt_input_data, ht_input_data, lt2_input_data, plot_filename)
 
     assert (os.path.exists(plot_filename))
 
