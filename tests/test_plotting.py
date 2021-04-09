@@ -8,16 +8,16 @@ sys.path.append(os.path.join(
     os.path.dirname(__file__),
     ".."))
 
-from src import thermomag_plotter as thermomag_plotter
+import src.thermomag_plotter as thermomag_plotter
 
 def test_plot():
     assert(thermomag_plotter.plot() == None)
 
 def test_process_data():
     """Test that data processing returns the correct values."""
-    input_data = np.array([[0,0],[1,100]])
+    input_data = np.array([[0,0],[100,1]])
     function_output = thermomag_plotter.process_data(input_data)
-    expected_output = np.array([[0,0,273.15],[1,100,373.15]])
+    expected_output = np.array([[0,0,273.15],[100,1,373.15]])
     
     assert(np.all(function_output == expected_output))
 
@@ -34,9 +34,9 @@ def test_read_data():
     ht_data = thermomag_plotter.read_data(ht_input_filename)
     lt2_data = thermomag_plotter.read_data(lt2_input_filename)
 
-    assert(lt_data.shape == (206,8))
-    assert(ht_data.shape == (311,8))
-    assert(lt2_data.shape == (207,8))
+    assert(lt_data.shape == (206,7))
+    assert(ht_data.shape == (311,7))
+    assert(lt2_data.shape == (207,7))
     assert(lt_data[0,1] == 2200.3)
     assert(ht_data[0,1] == 2142)
     assert(lt2_data[0,1] == 2225)
