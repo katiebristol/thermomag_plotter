@@ -6,14 +6,14 @@ import os
 import sys
 
 def read_data(filename, delimiter=',', starting_row=0):
-        """This function reads data from a specified filename.
-        The specified filename should point to a .csv file."""
-        # Create an array (a multi-dimensional table) out of our data file, full of text
-        thermomag_data = np.genfromtxt(filename, delimiter=delimiter, skip_header=0)
+    """This function reads data from a specified filename.
+    The specified filename should point to a .csv file."""
+    # Create an array (a multi-dimensional table) out of our data file, full of text
+    thermomag_data = np.genfromtxt(filename, delimiter=delimiter, skip_header=0)
 
-        # Select the data range we are interested in, convert it into a new array, full of numbers
-        data_array = np.array(thermomag_data[starting_row:,:], dtype=float)
-        return data_array
+    # Select the data range we are interested in, convert it into a new array, full of numbers
+    data_array = np.array(thermomag_data[starting_row:,:], dtype=float)
+    return data_array
 
 def process_data(data_array):
     """This function processes the data by converting temperature 
@@ -90,6 +90,8 @@ def plot_data(processed_lt_data, processed_ht_data, processed_lt2_data, plot_fil
     thermomag_figure.savefig(plot_filename)
 
 def plot():
+    """Main program that reads a dataset, processes it,
+    plots it, and writes the converted data into a json file."""
     lt_input_file = ("DA7_1-L1.csv")
     ht_input_file = ("DA7_1-H1.csv")
     lt2_input_file = ("DA7_1-L2.csv")
