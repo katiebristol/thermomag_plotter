@@ -34,20 +34,20 @@ def test_read_data():
     ht_data = thermomag_plotter.read_data(ht_input_filename)
     lt2_data = thermomag_plotter.read_data(lt2_input_filename)
 
-    assert(lt_data.shape == (206,7))
-    assert(ht_data.shape == (311,7))
-    assert(lt2_data.shape == (207,7))
+    assert(lt_data.shape == (206,8))
+    assert(ht_data.shape == (311,8))
+    assert(lt2_data.shape == (207,8))
     assert(lt_data[0,1] == 2200.3)
     assert(ht_data[0,1] == 2142)
     assert(lt2_data[0,1] == 2225)
 
-def test_plot_data():
+def test_plot_data(input_data, plot_filename):
     """Test that the script produces a plot."""
     plot_file = "test_plot_data.pdf"
     results_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","results"))
     plot_filename = os.path.join(results_directory,plot_file)
 
-    input_data = np.array([[0,0,273.15],[1,100,373.15]])
+    input_data = np.array([[0,273.15],[1,373.15]])
 
     if os.path.exists(plot_filename):
         os.remove(plot_filename)
@@ -59,34 +59,18 @@ def test_plot_data():
 def test_convert_data():
     """Test that the data is converted into json that is
     consistent with the input."""
-    lt_input_file = ("DA7_1-L1.csv")
-    ht_input_file = ("DA7_1-H1.csv")
-    lt2_input_file = ("DA7_1-L2.csv")
-    lt_json_output_file = "lt_data_output.json"
-    ht_json_output_file = "ht_data_output.json"
-    lt2_json_output_file = "lt2_data_output.json"
+    input_file = "DA7_1-L1.csv"
+    json_output_file = "data_output.json"
 
     data_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","data"))
     results_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","results"))
 
-    lt_input_filename = os.path.join(data_directory,lt_input_file)
-    ht_input_filename = os.path.join(data_directory,ht_input_file)
-    lt2_input_filename = os.path.join(data_directory,lt2_input_file)
-    lt_json_filename = os.path.join(results_directory,lt_json_output_file)
-    ht_json_filename = os.path.join(results_directory,ht_json_output_file)
-    lt2_json_filename = os.path.join(results_directory,lt2_json_output_file)
+    input_filename = os.path.join(data_directory,input_file)
+    json_filename = os.path.join(results_directory,json_output_file)
 
-    thermomag_plotter.convert_data(lt_input_filename, lt_json_filename)
-    thermomag_plotter.convert_data(ht_input_filename, ht_json_filename)
-    thermomag_plotter.convert_data(lt2_input_filename, lt2_input_filename)
+    plotting.convert_data(input_filename, json_filename)
 
-    lt_input_data = pd.read_csv(lt_input_filename, index_col='TEMP', header=0)
-    ht_input_data = pd.read_csv(ht_input_filename, index_col='TEMP', header=0)
-    lt2_input_data = pd.read_csv(lt2_input_filename, index_col='TEMP', header=0)
-    lt_output_data = pd.read_json(lt_json_filename)
-    ht_output_data = pd.read_json(ht_json_filename)
-    lt2_output_data = pd.read_json(lt2_json_filename)
+    input_data = pd.read_csv(input_filename, index_col='TEMP', header=0)
+    output_data = pd.read_json(json_filename)
 
-    assert lt_input_data.info() is lt_output_data.info()
-    assert ht_input_data.info() is ht_output_data.info()
-    assert lt2_input_data.info() is lt2_output_data.info
+    assert (input_data.info() is output_data.info())

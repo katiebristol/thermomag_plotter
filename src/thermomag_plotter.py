@@ -5,11 +5,11 @@ import pandas as pd
 import os
 import sys
 
-def read_data(filename, delimiter=',', starting_row=0):
+def read_data(filename, delimiter=',', starting_row=1):
     """This function reads data from a specified filename.
     The specified filename should point to a .csv file."""
     # Create an array (a multi-dimensional table) out of our data file, full of text
-    thermomag_data = np.genfromtxt(filename, delimiter=delimiter, skip_header=0)
+    thermomag_data = np.genfromtxt(filename, delimiter=delimiter)
 
     # Select the data range we are interested in, convert it into a new array, full of numbers
     data_array = np.array(thermomag_data[starting_row:,:], dtype=float)
@@ -39,21 +39,21 @@ def plot_data(processed_lt_data, processed_ht_data, processed_lt2_data, plot_fil
     thermomag_figure = plt.figure()
 
     ## Plotting each dataset as a line with unique colors and line styles
-    plt.plot(processed_lt_data[:,9],
+    plt.plot(processed_lt_data[:,8],
             processed_lt_data[:,2],
             color='blue', 
             linestyle='dashed', 
             linewidth='1.5', 
             label="L1")
 
-    plt.plot(processed_ht_data[:,9],
+    plt.plot(processed_ht_data[:,8],
             processed_ht_data[:,2],
             color='firebrick', 
             linestyle='solid', 
             linewidth='1.5', 
             label="H1")
 
-    plt.plot(processed_lt2_data[:,9],
+    plt.plot(processed_lt2_data[:,8],
             processed_lt2_data[:,2],
             color='blue', 
             linestyle='dotted',
