@@ -1,4 +1,8 @@
-# Purpose
+# Thermomag Plotter
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+## Purpose
 
 This software was created to streamline the process of plotting thermomagnetic curves with matplotlib.
 It was designed for use with data files output by AGICO MFK1-FA Kappabridges but may work with other 
@@ -17,7 +21,7 @@ All files should be converted from their original .clw and .cur files to .csv fo
 
 ## Outputs
 
-If inputs are correct, the software should output a figure (.png extension) of the thermomagnetic curves. 
+If inputs are correct, the software should output a figure (.pdf extension) of the thermomagnetic curves. 
 In addition, the corrected data files will be output in .json format. 
 
 ## Notes
@@ -28,4 +32,4 @@ https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.arrow.html
 
 ## License
 
-See LICENSE.txt for more info. 
+This Simple Plotting Library is published under the [MIT license](LICENSE.txt).
