@@ -47,14 +47,14 @@ def test_plot_data():
     results_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","results"))
     plot_filename = os.path.join(results_directory,plot_file)
 
-    lt_input_data = np.array([[0,273.15],[1,373.15]])
-    ht_input_data = np.array([[0,273.15],[1,373.15]])
-    lt2_input_data = np.array([[0,273.15],[1,373.15]])
+    processed_data1 = np.array([[0,32,273],[1,212,373]])
+    processed_data2 = np.array([[0,32,273],[1,212,373]])
+    processed_data3 = np.array([[0,32,273],[1,212,373]])
 
     if os.path.exists(plot_filename):
         os.remove(plot_filename)
         
-    thermomag_plotter.plot_data(lt_input_data, ht_input_data, lt2_input_data, plot_filename)
+    thermomag_plotter.plot_data(processed_data1, processed_data2, processed_data3, plot_filename)
 
     assert (os.path.exists(plot_filename))
 
@@ -70,7 +70,7 @@ def test_convert_data():
     input_filename = os.path.join(data_directory,input_file)
     json_filename = os.path.join(results_directory,json_output_file)
 
-    plotting.convert_data(input_filename, json_filename)
+    thermomag_plotter.convert_data(input_filename, json_filename)
 
     input_data = pd.read_csv(input_filename, index_col='TEMP', header=0)
     output_data = pd.read_json(json_filename)
