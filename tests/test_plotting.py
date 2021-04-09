@@ -41,7 +41,7 @@ def test_read_data():
     assert(ht_data[0,1] == 2142)
     assert(lt2_data[0,1] == 2225)
 
-def test_plot_data(input_data, plot_filename):
+def test_plot_data():
     """Test that the script produces a plot."""
     plot_file = "test_plot_data.pdf"
     results_directory = os.path.realpath(os.path.join(os.path.dirname(__file__),"..","results"))
