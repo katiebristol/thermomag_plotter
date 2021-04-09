@@ -28,7 +28,7 @@ In addition, the corrected data files will be output in .json format.
 
 The arrows indicating the direction of measurement will need to be tailored to each set of data. To do this,
 edit the x, y, dx, dy parameters of each arrow. For a more detailed description, see:
-https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.arrow.html
+[matplotlib.pyplot.arrow docs](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.arrow.html)
 
 ## License
 
