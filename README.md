@@ -1,7 +1,7 @@
 # Thermomag Plotter
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5072/zenodo.791886.svg)](10.5072/zenodo.791886)
+[![DOI](https://sandbox.zenodo.org/badge/DOI/10.5072/zenodo.791886.svg)](https://doi.org/10.5072/zenodo.791886)
 
 ## Purpose
 
